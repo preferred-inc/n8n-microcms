@@ -27,7 +27,17 @@ export class MicroCmsApi implements ICredentialType {
 			},
 			default: '',
 			required: true,
-			description: 'The API key for accessing your microCMS API',
+			description: 'The API key for accessing your microCMS Content API',
+		},
+		{
+			displayName: 'Management API Key',
+			name: 'managementApiKey',
+			type: 'string',
+			typeOptions: {
+				password: true,
+			},
+			default: '',
+			description: 'The API key for Management API operations (media upload, status changes). Only required if you use Management API features.',
 		},
 	];
 

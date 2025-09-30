@@ -7,7 +7,8 @@ import type {
 import { NodeOperationError } from 'n8n-workflow';
 
 import { contentResource } from './actions/Content.resource';
-import { microCmsApiRequest } from './transport';
+import { managementResource } from './actions/Management.resource';
+import { microCmsApiRequest, microCmsManagementApiRequest, microCmsUploadMedia } from './transport';
 
 export class MicroCms implements INodeType {
 	description: INodeTypeDescription = {
@@ -47,10 +48,15 @@ export class MicroCms implements INodeType {
 						name: 'Content',
 						value: 'content',
 					},
+					{
+						name: 'Management',
+						value: 'management',
+					},
 				],
 				default: 'content',
 			},
 			...contentResource,
+			...managementResource,
 		],
 	};
 
@@ -202,6 +208,51 @@ export class MicroCms implements INodeType {
 
 						returnData.push({
 							json: { success: true, ...responseData },
+							pairedItem: { item: i },
+						});
+					}
+				} else if (resource === 'management') {
+					if (operation === 'updateStatus') {
+						// Update content status
+						const endpoint = this.getNodeParameter('endpoint', i) as string;
+						const contentId = this.getNodeParameter('contentId', i) as string;
+						const status = this.getNodeParameter('status', i) as string;
+
+						if (!endpoint || !contentId) {
+							throw new NodeOperationError(
+								this.getNode(),
+								'Endpoint and Content ID are required',
+								{ itemIndex: i },
+							);
+						}
+
+						const body = {
+							status: [status],
+						};
+
+						const responseData = await microCmsManagementApiRequest.call(
+							this,
+							'PATCH',
+							`/contents/${endpoint}/${contentId}/status`,
+							body,
+						);
+
+						returnData.push({
+							json: { success: true, status, ...responseData },
+							pairedItem: { item: i },
+						});
+					} else if (operation === 'uploadMedia') {
+						// Upload media file
+						const binaryPropertyName = this.getNodeParameter('binaryPropertyName', i) as string;
+
+						const responseData = await microCmsUploadMedia.call(
+							this,
+							binaryPropertyName,
+							i,
+						);
+
+						returnData.push({
+							json: responseData,
 							pairedItem: { item: i },
 						});
 					}

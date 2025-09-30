@@ -1,22 +1,25 @@
 {
-  "name": "n8n-nodes-<...>",
+  "name": "n8n-nodes-microcms",
   "version": "0.1.0",
-  "description": "",
+  "description": "n8n community node for microCMS headless CMS",
   "keywords": [
-    "n8n-community-node-package"
+    "n8n-community-node-package",
+    "microcms",
+    "cms",
+    "headless-cms"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/yoshihisakaino/n8n-nodes-microcms",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "Yoshihisa Kaino",
+    "email": "your-email@example.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "https://github.com/yoshihisakaino/n8n-nodes-microcms.git"
   },
   "engines": {
-    "node": ">=20.15"
+    "node": ">=20.9"
   },
   "main": "index.js",
   "scripts": {
@@ -33,12 +36,10 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
+      "dist/credentials/MicroCmsApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+      "dist/nodes/MicroCms/MicroCms.node.js"
     ]
   },
   "devDependencies": {

@@ -9,14 +9,14 @@
     "headless-cms"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/yoshihisakaino/n8n-nodes-microcms",
+  "homepage": "https://github.com/preferred-inc/n8n-microcms",
   "author": {
     "name": "Yoshihisa Kaino",
-    "email": "your-email@example.com"
+    "email": "yoppy1125yoppy@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yoshihisakaino/n8n-nodes-microcms.git"
+    "url": "git+https://github.com/preferred-inc/n8n-microcms.git"
   },
   "engines": {
     "node": ">=20.9"
@@ -52,5 +52,8 @@
   },
   "peerDependencies": {
     "n8n-workflow": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/preferred-inc/n8n-microcms/issues"
   }
 }

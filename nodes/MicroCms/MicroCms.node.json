@@ -1,0 +1,19 @@
+{
+  "node": "n8n-nodes-microcms.microCms",
+  "nodeVersion": "1.0",
+  "codexVersion": "1.0",
+  "categories": ["Marketing", "Development"],
+  "resources": {
+    "credentialDocumentation": [
+      {
+        "url": "https://document.microcms.io/manual/api-key-setting"
+      }
+    ],
+    "primaryDocumentation": [
+      {
+        "url": "https://github.com/preferred-inc/n8n-microcms#readme"
+      }
+    ]
+  },
+  "alias": ["microcms", "cms", "headless", "content"]
+}

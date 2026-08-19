@@ -55,9 +55,13 @@ npx n8n
 1. n8nの画面で「Credentials」→「New」をクリック
 2. 「microCMS API」を検索して選択
 3. 以下の情報を入力：
-   - **Service Domain**: `partner-pref`
-   - **API Key**: `vNpwTFeKNmTwPMfhdoE3PEF2mujMtJAu0pwO`
+   - **Service Domain**: microCMS のサービスドメイン（`https://xxxx.microcms.io` の `xxxx` 部分）
+   - **API Key**: microCMS 管理画面 → サービス設定 → API キー で発行した値
 4. 「Save」をクリック
+
+> ⚠️ API キーやサービスドメインをこのリポジトリにコミットしないこと。
+> ローカルでの検証用に控える場合は、Git 管理外の `.env`（`.gitignore` 済み）を使う。
+> `.env.example` を参照。
 
 ## 6. テストワークフローの作成
 
@@ -151,10 +155,10 @@ npx n8n
 
 ### ビルドエラーが出る場合
 ```bash
-cd /Users/yoshihisakaino/Documents/github/n8n-microcms
+# リポジトリのルートで
 npm run build
 ```
 
 ### 認証エラーが出る場合
 - Service Domainに `https://` や `/api/v1/` を含めないこと
-- 正しい値は `partner-pref` のみ
+- `https://xxxx.microcms.io` の `xxxx` の部分のみを入力する

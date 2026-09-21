@@ -23,7 +23,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "npx rimraf dist && tsc && gulp build:icons",
+    "build": "npx rimraf dist .tsbuildinfo && tsc && gulp build:icons && node -e \"require('node:fs').accessSync('dist/nodes/MicroCms/MicroCms.node.js')\"",
     "dev": "tsc --watch",
     "format": "prettier nodes credentials --write",
     "lint": "eslint nodes credentials package.json",

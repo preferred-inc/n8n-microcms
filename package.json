@@ -55,5 +55,8 @@
   },
   "bugs": {
     "url": "https://github.com/preferred-inc/n8n-microcms/issues"
+  },
+  "overrides": {
+    "axios": ">=1.20.0"
   }
 }

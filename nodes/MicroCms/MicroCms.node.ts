@@ -8,7 +8,12 @@ import { NodeOperationError } from 'n8n-workflow';
 
 import { contentResource } from './actions/Content.resource';
 import { managementResource } from './actions/Management.resource';
-import { microCmsApiRequest, microCmsManagementApiRequest, microCmsUploadMedia } from './transport';
+import {
+	contentPath,
+	microCmsApiRequest,
+	microCmsManagementApiRequest,
+	microCmsUploadMedia,
+} from './transport';
 
 export class MicroCms implements INodeType {
 	description: INodeTypeDescription = {
@@ -95,7 +100,7 @@ export class MicroCms implements INodeType {
 						const responseData = await microCmsApiRequest.call(
 							this,
 							'GET',
-							`/${endpoint}/${contentId}`,
+							contentPath(endpoint, contentId),
 							undefined,
 							qs,
 						);
@@ -134,7 +139,7 @@ export class MicroCms implements INodeType {
 						const responseData = await microCmsApiRequest.call(
 							this,
 							'GET',
-							`/${endpoint}`,
+							contentPath(endpoint),
 							undefined,
 							qs,
 						);
@@ -161,7 +166,7 @@ export class MicroCms implements INodeType {
 						const responseData = await microCmsApiRequest.call(
 							this,
 							'POST',
-							`/${endpoint}`,
+							contentPath(endpoint),
 							parsedBody,
 						);
 
@@ -188,7 +193,7 @@ export class MicroCms implements INodeType {
 						const responseData = await microCmsApiRequest.call(
 							this,
 							'PATCH',
-							`/${endpoint}/${contentId}`,
+							contentPath(endpoint, contentId),
 							parsedBody,
 						);
 
@@ -203,7 +208,7 @@ export class MicroCms implements INodeType {
 						const responseData = await microCmsApiRequest.call(
 							this,
 							'DELETE',
-							`/${endpoint}/${contentId}`,
+							contentPath(endpoint, contentId),
 						);
 
 						returnData.push({
@@ -233,7 +238,7 @@ export class MicroCms implements INodeType {
 						const responseData = await microCmsManagementApiRequest.call(
 							this,
 							'PATCH',
-							`/contents/${endpoint}/${contentId}/status`,
+							`/contents${contentPath(endpoint, contentId)}/status`,
 							body,
 						);
 

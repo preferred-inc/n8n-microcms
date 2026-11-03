@@ -19,7 +19,16 @@ export function assertServiceDomain(serviceDomain: unknown): string {
 
 /** エンドポイント名・コンテンツ ID をパスに入れる前にエンコードする（"/" や "?" を含む値で別の API を叩かない）。 */
 export function contentPath(...segments: string[]): string {
-	return segments.map((s) => '/' + encodeURIComponent(String(s).trim())).join('');
+	return segments
+		.map((s) => {
+			const value = String(s).trim();
+			// "." / ".." は encodeURIComponent で符号化されず、URL 解決時に親階層へ移動してしまう
+			if (value === '' || value === '.' || value === '..') {
+				throw new Error(`Invalid path segment "${value}"`);
+			}
+			return '/' + encodeURIComponent(value);
+		})
+		.join('');
 }
 
 /**

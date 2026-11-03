@@ -57,6 +57,13 @@ test('contentPath: 区切り文字をエンコードして別の API を叩か�
 	assert.equal(contentPath('blogs', '../media?x=1'), '/blogs/..%2Fmedia%3Fx%3D1');
 });
 
+test('contentPath: "." / ".." / 空のパス要素は拒否する（親階層へ抜けない）', () => {
+	for (const bad of ['..', '.', ' .. ', '']) {
+		assert.throws(() => contentPath('blogs', bad), /Invalid path segment/, JSON.stringify(bad));
+		assert.throws(() => contentPath(bad), /Invalid path segment/, JSON.stringify(bad));
+	}
+});
+
 test('buildMultipartBody: 1ファイルの multipart 本文を組み立て、ファイル名の引用符・改行を潰す', () => {
 	const { body, contentType } = buildMultipartBody('file', Buffer.from('DATA'), 'a"b\r\n.png', 'image/png', 'BOUNDARY');
 	assert.equal(contentType, 'multipart/form-data; boundary=BOUNDARY');
